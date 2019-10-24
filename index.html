@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Results</title>
+
+	<meta name="description" content="Private search engine for mobile and desktop">
+	<meta name="theme-color" content="#faf9fe">
+	<meta name="referrer" content="never">
+	
+	<script>
+		function urlParam(name){
+			var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+			if (results == null){
+				return null;
+			}
+			else {
+				return decodeURIComponent(results[1].replace(/\+/gi, " ")) || 0;
+			}
+		}
+		var gl = urlParam('gl');
+		var hl = urlParam('hl');
+		if (hl == null) hl = navigator.language;
+		var q = urlParam('q');
+		if (q) document.title = decodeURIComponent(q).replace(/<\/?[^>]+(>|$)/g, "") + " - Private Search";
+		function setscroll() {
+			if ((navigator.userAgent.match(/iPhone|Android/i)) && (!navigator.userAgent.match(/iPad/i))) {
+				window.scrollTo(0, 45);
+			}
+		}
+		document.addEventListener('DOMContentLoaded', setscroll, false);
+		(function() {
+			var gcse = document.createElement('script');
+				gcse.type = 'text/javascript';
+				gcse.async = true;
+				gcse.src = 'https://cse.google.com/cse.js?cx=000875715295900326989:krrwvwuikyw&language='+hl;
+			var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(gcse, s);
+		})();
+	</script>
+	<style>.plsh{min-height:700px;}</style>
+</head>
+
+<body onpageshow="setq()">
+	<section class="layout">
+		<!--<gcse:searchresults-only data-gl="fr"></gcse:searchresults-only>-->
+		<div class="plsh"><div class="gcse-search" id="sr"></div></div>
+	</section>
+	<script>
+		document.getElementById("sr").setAttribute('data-gl', gl);
+	</script>
+
+</body>
+</html>
